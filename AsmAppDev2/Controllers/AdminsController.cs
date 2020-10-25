@@ -11,7 +11,7 @@ namespace AsmAppDev2.Controllers
     // This file contains the DELETE and EDIT for the Admin Role
     public class AdminsController : Controller
     {
-        //Create bridges between entities and databases
+        //Create bridges between models and databases
         private ApplicationDbContext _context;
 
         public AdminsController()

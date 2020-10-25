@@ -59,7 +59,6 @@
             <th>Programming Language</th>
             <th>Experience Details</th>
             <th>Department</th>
-            <th>Edit</th>
 
         </tr>
         @foreach (var trainee in Model)
@@ -70,7 +69,6 @@
                 <th>@trainee.Programming_Language</th>
                 <th>@trainee.Experience_Details</th>
                 <th>@trainee.Department</th>
-                <th>@Html.ActionLink("Edit", "Edit", new { id = trainee.ID })</th>
 
             </tr>
         }
