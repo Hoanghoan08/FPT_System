@@ -1,0 +1,41 @@
+﻿@model AsmAppDev2.Models.TrainerUser
+@{
+	ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm("Create", "TrainerUsers", FormMethod.Post))
+{
+	<div class="form-group">
+		@Html.LabelFor(tp => tp.TrainerID)
+		@Html.DropDownListFor(tp => tp.TrainerID
+			, new SelectList(Model.Trainers, "ID", "Email"),
+			"Select Trainer",
+			new { @class = "form-control" }
+		)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(tp => tp.Full_Name)
+		@Html.TextBoxFor(tp => tp.Full_Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(tp => tp.Full_Name)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(tp => tp.Working_Place)
+		@Html.TextBoxFor(tp => tp.Working_Place, new { @class = "form-control" })
+		@Html.ValidationMessageFor(tp => tp.Working_Place)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(tp => tp.Phone)
+		@Html.TextBoxFor(tp => tp.Phone, new { @class = "form-control" })
+		@Html.ValidationMessageFor(tp => tp.Phone)
+	</div>
+
+	<button type="submit" class="btn btn-primary">Add</button>
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>

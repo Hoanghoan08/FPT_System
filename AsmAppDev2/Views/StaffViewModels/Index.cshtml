@@ -1,0 +1,59 @@
+﻿@model AsmAppDev2.ViewModels.StaffViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+{
+
+    <h3>Trainee</h3>
+    @Html.ActionLink("Create new Trainee Account", "Register", "Account")
+    <div class="panel-body">
+        <table class="table table-hover table-bordered table-condensed" id="Index">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+            @foreach (var user in Model.Trainee)
+            {
+                <tr>
+                    <td>@user.UserName </td>
+                    <td>@user.Email</td>
+                    <td>@user.RoleName</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = user.UserID }, null)</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = user.UserID }, null)</td>
+
+
+                </tr>
+            }
+        </table>
+    </div>
+    <h3>Trainer</h3>
+    <div class="panel-body">
+        <table class="table table-hover table-bordered table-condensed" id="Index">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            @foreach (var user in Model.Trainer)
+            {
+                <tr>
+                    <td>@user.UserName </td>
+                    <td> @user.Email</td>
+                    <td> @user.RoleName</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+@Html.ActionLink("Back to home", "Index", "Home")

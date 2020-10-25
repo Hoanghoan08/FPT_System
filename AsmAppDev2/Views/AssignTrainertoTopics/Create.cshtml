@@ -1,0 +1,23 @@
+﻿@model AsmAppDev2.ViewModels.AssignTrainertoTopicViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(tr => tr.AssignTrainertoTopic.TrainerID)
+        @Html.DropDownListFor(tr => tr.AssignTrainertoTopic.TrainerID, new SelectList(Model.Trainers, "ID", "Email"), "", new { @class = "form-control" }
+        )
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(tr => tr.AssignTrainertoTopic.Topic.Name)
+        @Html.DropDownListFor(tr => tr.AssignTrainertoTopic.TopicID, new SelectList(Model.Topics, "ID", "Name"), "", new { @class = "form-control" }
+        )
+    </div>
+
+    <button type="submit" class="btn btn-default">Assign</button>
+}

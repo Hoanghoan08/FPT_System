@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AsmAppDev2.ViewModels.UserInRoles>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Welcome Admin Handsome</h2>
+<h2><center>List of Staff and Trainer Account</center></h2>
+@Html.ActionLink("Create a new account", "Register", "Account", null, new { id = "OT", style = "color: Red" })
+
+<div class="panel-body">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Name of Role</th>
+                <th>Phone Number</th>
+                <th>Delete</th>
+                <th>Edit</th>
+                <th>Reset Password to Default</th>
+            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    @if ((user.Role.Contains("Trainee") || user.Role.Contains("Admin")) == false)
+                    {
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        <td>@user.setPhone</td>
+                        <td>@Html.ActionLink("Delete this user", "Delete", new { id = user.UserId })</td>
+                        <td>@Html.ActionLink("Edit this user", "Edit", new { id = user.UserId })</td>
+                        <td>@Html.ActionLink("Reset Pass","ResetPass", new { id = user.UserId })</td>
+                    }
+                </tr>
+            }
+    </table>
+</div>

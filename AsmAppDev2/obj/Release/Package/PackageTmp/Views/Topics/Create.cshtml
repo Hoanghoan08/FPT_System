@@ -1,0 +1,36 @@
+﻿@model AsmAppDev2.ViewModels.CourseTopicViewModel
+@{
+		ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+@using (Html.BeginForm("Create", "Topics", FormMethod.Post))
+{
+
+		<div class="form-group">
+				@Html.LabelFor(t => t.Topic.Name)
+				@Html.TextBoxFor(t => t.Topic.Name, new { @class = "form-control" })
+				@Html.ValidationMessageFor(t => t.Topic.Name)
+		</div>
+
+		<div class="form-group">
+				@Html.LabelFor(t => t.Topic.Description)
+				@Html.TextBoxFor(t => t.Topic.Description, new { @class = "form-control" })
+				@Html.ValidationMessageFor(t => t.Topic.Description)
+		</div>
+
+		<div class="form-group">
+				@Html.LabelFor(t => t.Topic.Course.Name)
+				@Html.DropDownListFor(t => t.Topic.CourseID,
+				 new SelectList(Model.Courses, "Id", "Name"),
+				 "Select Course Name",
+				 new { @class = "form-control" })
+		</div>
+		<button type="submit" class="btn btn-primary">Create</button>
+}
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>

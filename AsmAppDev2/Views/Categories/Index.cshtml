@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AsmAppDev2.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Category</h2>
+@using (Html.BeginForm("Index", "Categories", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+{
+    @Html.ActionLink("Create New Category", "Create")
+
+    <table class="table">
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </tr>
+
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+
+
+                <td>@Html.ActionLink("Edit", "Edit", new { id = category.ID })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = category.ID })</td>
+
+            </tr>
+        }
+    </table>
+}

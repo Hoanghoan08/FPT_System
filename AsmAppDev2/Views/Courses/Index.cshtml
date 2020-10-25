@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AsmAppDev2.Models.Course>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Course</h2>
+@using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+{
+    @Html.ActionLink("Create a new Course", "Create")
+
+    <table class="table">
+        <tr>
+            <th>Course </th>
+            <th>Descriptions</th>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </tr>
+
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.Description</td>
+                <td>@course.Category.Name</td>
+                <td>@Html.ActionLink("Edit this course", "Edit", new { id = course.ID })</td>
+                <td>@Html.ActionLink("Delete this course", "Delete", new { id = course.ID })</td>
+
+            </tr>
+        }
+
+    </table>
+}

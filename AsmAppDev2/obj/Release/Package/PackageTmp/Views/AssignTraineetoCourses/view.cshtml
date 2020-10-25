@@ -1,0 +1,21 @@
+﻿@model IEnumerable<AsmAppDev2.Models.AssignTraineetoCourse>
+@{
+		ViewBag.Title = "view";
+}
+
+<h2>View Course</h2>
+<table class="table table-striped">
+	<tr>
+		<th>Trainee Email</th>
+		<th>Trainee UserName</th>
+		<th>Course Name</th>
+	</tr>
+	@foreach (var trainee in Model)
+	{
+		<tr>
+			<th>@trainee.Trainee.Email</th>
+			<th>@trainee.Trainee.UserName</th>
+			<th>@trainee.Course.Name</th>
+		</tr>
+	}
+</table>

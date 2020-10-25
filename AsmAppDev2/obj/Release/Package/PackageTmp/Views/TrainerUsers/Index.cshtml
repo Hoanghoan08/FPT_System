@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AsmAppDev2.Models.TrainerUser>
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>View Profile Trainer</h2>
+@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+{
+	@Html.ActionLink("Add Trainer Profile", "Create", null, new { id = "OT", style = "color: Red" })
+}
+
+<table class="table table-striped">
+	<tr>
+
+		<th>Trainer Email</th>
+		<th>Trainer UserName</th>
+		<th>Trainer FullName</th>
+		<th>Working Place</th>
+		<th>Phone Number</th>
+		@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+		{
+			<th>Edit</th>
+		}
+
+	</tr>
+	@foreach (var trainer in Model)
+	{
+		<tr>
+
+			<th>@trainer.Trainer.Email</th>
+			<th>@trainer.Trainer.UserName</th>
+			<th>@trainer.Full_Name</th>
+			<th>@trainer.Working_Place</th>
+			<th>@trainer.Phone</th>
+			@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+			{
+				<th>@Html.ActionLink("Edit", "Edit", new { id = trainer.ID })</th>
+			}
+		</tr>
+	}
+</table>
+@Html.ActionLink("Back to home", "Index", "Home")

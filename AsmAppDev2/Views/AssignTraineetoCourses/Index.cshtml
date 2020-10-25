@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AsmAppDev2.Models.AssignTraineetoCourse>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Trainee Course</h2>
+
+
+@if (User.IsInRole("Staff"))
+{
+    @Html.ActionLink("Assign Trainee to Course", "Create")
+
+
+    <table class="table">
+        <tr>
+            <th>Email</th>
+            <th>UserName</th>
+            <th>Course </th>
+            <th>Delete</th>
+
+
+        </tr>
+        @foreach (var assign in Model)
+        {
+            <tr>
+                <th>@assign.Trainee.Email</th>
+                <th>@assign.Trainee.UserName</th>
+                <th>@assign.Course.Name</th>
+                <th>@Html.ActionLink("Delete", "Delete", new { id = assign.ID })</th>
+
+            </tr>
+        }
+    </table>
+}
+@if (User.IsInRole("Trainee"))
+{
+    <table class="table">
+        <tr>
+            <th>Trainee</th>
+            <th>Course</th>
+        </tr>
+
+        @foreach (var assign in Model)
+        {
+            <tr>
+                <td>@assign.Trainee</td>
+                <td>@assign.Course.Name</td>
+            </tr>
+        }
+    </table>
+}

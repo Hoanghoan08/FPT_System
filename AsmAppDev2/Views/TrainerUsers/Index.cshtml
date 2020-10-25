@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AsmAppDev2.Models.TrainerUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Profile Trainer</h2>
+@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+{
+    @Html.ActionLink("Add Trainer Profile", "Create")
+
+
+    <table class="table">
+        <tr>
+
+            <th>Email</th>
+            <th>UserName</th>
+            <th>FullName</th>
+            <th>Working Place</th>
+            <th>Phone Number</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+
+        </tr>
+        @foreach (var trainer in Model)
+        {
+            <tr>
+
+                <th>@trainer.Trainer.Email</th>
+                <th>@trainer.Trainer.UserName</th>
+                <th>@trainer.Full_Name</th>
+                <th>@trainer.Working_Place</th>
+                <th>@trainer.Phone</th>
+                <th>@Html.ActionLink("Edit", "Edit", new { id = trainer.ID })</th>
+                <th>@Html.ActionLink("Delete", "Delete", new { id = trainer.ID })</th>
+            </tr>
+        }
+    </table>
+}
+@if (User.IsInRole("Trainer"))
+{
+    <table class="table">
+        <tr>
+            <th>FullName</th>
+            <th>Working Place</th>
+            <th>Phone Number</th>
+            <th>Edit</th>
+
+        </tr>
+        @foreach (var trainer in Model)
+        {
+            <tr>
+                <th>@trainer.Full_Name</th>
+                <th>@trainer.Working_Place</th>
+                <th>@trainer.Phone</th>
+                <th>@Html.ActionLink("Edit", "Edit", new { id = trainer.ID })</th>
+            </tr>
+        }
+    </table>
+}
+@Html.ActionLink("Back to home", "Index", "Home")

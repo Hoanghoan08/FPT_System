@@ -1,0 +1,25 @@
+﻿@model AsmAppDev2.Models.Category
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(c => c.ID)
+    <div class="form-group">
+        @Html.LabelFor(c => c.Name)
+        @Html.EditorFor(c => c.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(c => c.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Description)
+        @Html.EditorFor(c => c.Description, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(c => c.Description, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-default">Edit</button>
+}
+<div>
+</div>
