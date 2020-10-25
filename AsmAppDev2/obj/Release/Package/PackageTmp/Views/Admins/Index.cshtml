@@ -16,6 +16,7 @@
                 <th>Phone Number</th>
                 <th>Delete</th>
                 <th>Edit</th>
+                <th>Reset Password to Default</th>
             </tr>
             @foreach (var user in Model)
             {
@@ -28,6 +29,7 @@
                         <td>@user.setPhone</td>
                         <td>@Html.ActionLink("Delete this user", "Delete", new { id = user.UserId })</td>
                         <td>@Html.ActionLink("Edit this user", "Edit", new { id = user.UserId })</td>
+                        <td>@Html.ActionLink("Reset Pass","ResetPass", new { id = user.UserId })</td>
                     }
                 </tr>
             }

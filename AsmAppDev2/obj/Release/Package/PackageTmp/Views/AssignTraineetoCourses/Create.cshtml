@@ -6,26 +6,21 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Create", "AssignTraineetoCourses", FormMethod.Post))
+@using (Html.BeginForm())
 {
     <div class="form-group">
         @Html.LabelFor(tr => tr.AssignTraineetoCourse.TraineeID)
-        @Html.DropDownListFor(tr => tr.AssignTraineetoCourse.TraineeID
-            , new SelectList(Model.Trainees, "ID", "Email"),
-            "Select Trainee",
-            new { @class = "form-control" }
-        )
+        @Html.DropDownListFor(tr => tr.AssignTraineetoCourse.TraineeID, new SelectList(Model.Trainees, "ID", "Email"), "", new { @class = "form-control" })
     </div>
 
     <div class="form-group">
         @Html.LabelFor(tr => tr.AssignTraineetoCourse.Course.Name)
-        @Html.DropDownListFor(tr => tr.AssignTraineetoCourse.CourseID
-            , new SelectList(Model.Courses, "Id", "Name"),
-            "Select Course",
-            new { @class = "form-control" }
-        )
+        @Html.DropDownListFor(tr => tr.AssignTraineetoCourse.CourseID, new SelectList(Model.Courses, "ID", "Name"), "", new { @class = "form-control" })
 
     </div>
 
-    <button type="submit" class="btn btn-primary">Assign</button>
+    <button type="submit" class="btn btn-default">Assign</button>
 }
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

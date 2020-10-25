@@ -1,64 +1,80 @@
 ﻿@model IEnumerable<AsmAppDev2.Models.TraineeUser>
 @{
-	ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 <h2>Trainee Informations</h2>
 
 
-
-@using (Html.BeginForm("Index", "TraineeUsers", FormMethod.Get))
-{
-	<p>
-		<input type="search" placeholder="Enter Trainee Email or UserName"
-					 name="searchTraineeProfile" style="width:225px; height:33px;" />
-
-		<input type="submit" value="Search" class="btn btn-primary" />
-
-	</p>
-}
-
-
 @if (Request.IsAuthenticated && User.IsInRole("Staff"))
 {
-	@Html.ActionLink("Add Trainee Profile", "Create", null, new { id = "OT", style = "color: Red" })
+  using (Html.BeginForm("Index", "TraineeUsers", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
 }
 
-<table class="table table-striped">
-	<tr>
+    @Html.ActionLink("Add Trainee Profile", "Create")
 
-		<th>Trainee Email</th>
-		<th>Trainee UserName</th>
-		<th>Trainee FullName</th>
-		<th>Education</th>
-		<th>Programming Language</th>
-		<th>Experience Details</th>
-		<th>Department</th>
-		@if (Request.IsAuthenticated && User.IsInRole("Staff"))
-		{
-			<th>Edit</th>
-			<th>Delete</th>
-		}
 
-	</tr>
-	@foreach (var trainee in Model)
-	{
-		<tr>
+    <table class="table">
+        <tr>
 
-			<th>@trainee.Trainee.Email</th>
-			<th>@trainee.Trainee.UserName</th>
-			<th>@trainee.Full_Name</th>
-			<th>@trainee.Education</th>
-			<th>@trainee.Programming_Language</th>
-			<th>@trainee.Experience_Details</th>
-			<th>@trainee.Department</th>
-			@if (Request.IsAuthenticated && User.IsInRole("Staff"))
-			{
-				<th>@Html.ActionLink("Edit", "Edit", new { id = trainee.ID })</th>
-				<th>@Html.ActionLink("Delete", "Delete", new { id = trainee.ID })</th>
-			}
-		</tr>
-	}
-</table>
+            <th>Email</th>
+            <th>UserName</th>
+            <th>FullName</th>
+            <th>Education</th>
+            <th>Programming Language</th>
+            <th>Experience Details</th>
+            <th>Department</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </tr>
+        @foreach (var trainee in Model)
+        {
+            <tr>
+
+                <th>@trainee.Trainee.Email</th>
+                <th>@trainee.Trainee.UserName</th>
+                <th>@trainee.Full_Name</th>
+                <th>@trainee.Education</th>
+                <th>@trainee.Programming_Language</th>
+                <th>@trainee.Experience_Details</th>
+                <th>@trainee.Department</th>
+                <th>@Html.ActionLink("Edit", "Edit", new { id = trainee.ID })</th>
+                <th>@Html.ActionLink("Delete", "Delete", new { id = trainee.ID })</th>
+            </tr>
+        }
+    </table>
+}
+@if (User.IsInRole("Trainee"))
+{
+    <table class="table">
+        <tr>
+            <th>FullName</th>
+            <th>Education</th>
+            <th>Programming Language</th>
+            <th>Experience Details</th>
+            <th>Department</th>
+            <th>Edit</th>
+
+        </tr>
+        @foreach (var trainee in Model)
+        {
+            <tr>
+                <th>@trainee.Full_Name</th>
+                <th>@trainee.Education</th>
+                <th>@trainee.Programming_Language</th>
+                <th>@trainee.Experience_Details</th>
+                <th>@trainee.Department</th>
+                <th>@Html.ActionLink("Edit", "Edit", new { id = trainee.ID })</th>
+
+            </tr>
+        }
+    </table>
+}
 
 @Html.ActionLink("Back to home", "Index", "Home")

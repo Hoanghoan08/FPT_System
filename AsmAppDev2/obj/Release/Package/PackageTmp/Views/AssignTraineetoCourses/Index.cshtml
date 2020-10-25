@@ -3,35 +3,49 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Assign Trainee to Course</h2>
+<h2>Trainee Course</h2>
 
 
-@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+@if (User.IsInRole("Staff"))
 {
-    @Html.ActionLink("Assign Trainee to Course", "Create", null, new { id = "OT", style = "color: Red" })
-}
+    @Html.ActionLink("Assign Trainee to Course", "Create")
 
-<table class="table table-striped">
-    <tr>
-        <th>Trainee Email</th>
-        <th>Trainee UserName</th>
-        <th>Course Name</th>
-        @if (Request.IsAuthenticated && User.IsInRole("Staff"))
-        {
-            <th>Delete</th>
-        }
 
-    </tr>
-    @foreach (var trainee in Model)
-    {
+    <table class="table">
         <tr>
-            <th>@trainee.Trainee.Email</th>
-            <th>@trainee.Trainee.UserName</th>
-            <th>@trainee.Course.Name</th>
-            @if (Request.IsAuthenticated && User.IsInRole("Staff"))
-            {
-                <th>@Html.ActionLink("Delete", "Delete", new { id = trainee.ID })</th>
-            }
+            <th>Email</th>
+            <th>UserName</th>
+            <th>Course </th>
+            <th>Delete</th>
+
+
         </tr>
-    }
-</table>
+        @foreach (var assign in Model)
+        {
+            <tr>
+                <th>@assign.Trainee.Email</th>
+                <th>@assign.Trainee.UserName</th>
+                <th>@assign.Course.Name</th>
+                <th>@Html.ActionLink("Delete", "Delete", new { id = assign.ID })</th>
+
+            </tr>
+        }
+    </table>
+}
+@if (User.IsInRole("Trainee"))
+{
+    <table class="table">
+        <tr>
+            <th>Trainee</th>
+            <th>Course</th>
+        </tr>
+
+        @foreach (var assign in Model)
+        {
+            <tr>
+                <td>@assign.Trainee</td>
+                <td>@assign.Course.Name</td>
+            </tr>
+        }
+    </table>
+}
