@@ -180,7 +180,7 @@ namespace AsmAppDev2.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);    
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");    
                     //Assign Role to user Here       
-                    await UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here     
                     if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
@@ -191,14 +191,16 @@ namespace AsmAppDev2.Controllers
                         return RedirectToAction("Index", "StaffViewModels");
                     }
                 }
-
-                ViewBag.Name = context.Roles.ToList();
+                // The starting point transfers data from AccountController to View / Register (Role)
+                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                          .ToList(), "Name", "Name");
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form    
             return View(model);
         }
+
 
         //
         // GET: /Account/ConfirmEmail
