@@ -37,9 +37,10 @@ namespace AsmAppDev2.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Create()
 		{
-			//Get Account Trainee
+			//Get Account Trainer
 			var userInDb = (from r in _context.Roles where r.Name.Contains("Trainer") select r).FirstOrDefault();
 			var users = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(userInDb.Id)).ToList();
 			var trainerUser = _context.TrainerUsers.ToList();
@@ -53,6 +54,7 @@ namespace AsmAppDev2.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Create(TrainerUser trainerUser)
 		{
 			var trainerInfo = new TrainerUser
@@ -71,6 +73,7 @@ namespace AsmAppDev2.Controllers
 
 
 		[HttpGet]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Edit(int id)
 		{
 			var trainerInDb = _context.TrainerUsers.SingleOrDefault(tn => tn.ID == id);
@@ -82,6 +85,7 @@ namespace AsmAppDev2.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Edit(TrainerUser trainerUser)
 		{
 			if (!ModelState.IsValid)
@@ -105,6 +109,7 @@ namespace AsmAppDev2.Controllers
 
 
 		[HttpGet]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Delete(int id)
 		{
 			var trainerInDb = _context.TrainerUsers.SingleOrDefault(tn => tn.ID == id);

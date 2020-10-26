@@ -17,6 +17,7 @@ namespace AsmAppDev2.Controllers
 
         //GET: Topics
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Index(string search)
         {
             var topics = _context.Topics.Include(t => t.Course);
@@ -31,6 +32,7 @@ namespace AsmAppDev2.Controllers
 
         //GET: Create
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create()
         {
             var viewModel = new CourseTopicViewModel
@@ -41,6 +43,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create(Topic topic)
         {
             if (!ModelState.IsValid)
@@ -102,6 +105,7 @@ namespace AsmAppDev2.Controllers
 
         //GET: Delete
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Delete(int id)
         {
             var topicInDb = _context.Topics.SingleOrDefault(t => t.ID == id);

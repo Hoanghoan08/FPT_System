@@ -20,6 +20,7 @@ namespace AsmAppDev2.Controllers
         }
 
         //Get: Manage user
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var useradmin = (from user in _context.Users
@@ -109,6 +110,7 @@ namespace AsmAppDev2.Controllers
 
         //Delete admin role
         [HttpGet]
+        [Authorize (Roles ="Admin")]
         public ActionResult Delete(string id)
         {
             // Find and assign the Id value in the Users table to accountInDb
@@ -126,7 +128,7 @@ namespace AsmAppDev2.Controllers
 
 
         //Reset pass for account to pass default
-
+        [Authorize(Roles = "Admin")]
         public ActionResult ResetPass(string id)
         {
             var accountInDb = _context.Users.SingleOrDefault(p => p.Id == id);

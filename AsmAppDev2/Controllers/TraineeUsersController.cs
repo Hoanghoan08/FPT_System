@@ -46,6 +46,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create()
         {
             //Get Account Trainee
@@ -61,6 +62,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create(TraineeUser traineeUser)
         {
             var traineeInfo = new TraineeUser
@@ -80,6 +82,7 @@ namespace AsmAppDev2.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Edit(int id)
         {
             var traineeInDb = _context.TraineeUsers.SingleOrDefault(te => te.ID == id);
@@ -91,6 +94,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Staff")]
         public ActionResult Edit(TraineeUser traineeUser)
         {
             if (!ModelState.IsValid)
@@ -115,6 +119,7 @@ namespace AsmAppDev2.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Delete(int id)
         {
             var traineeInDb = _context.TraineeUsers.SingleOrDefault(te => te.ID == id);

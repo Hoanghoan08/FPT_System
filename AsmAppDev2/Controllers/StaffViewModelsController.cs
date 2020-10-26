@@ -19,6 +19,7 @@ namespace AsmAppDev2.Controllers
 			_context = new ApplicationDbContext();
 		}
 		// GET: StaffViewModels
+		[Authorize(Roles = "Staff")]
 		public ActionResult Index()
 		{
 			var traineeRole = (from te in _context.Roles where te.Name.Contains("Trainee") select te).FirstOrDefault();

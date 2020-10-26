@@ -36,6 +36,7 @@ namespace AsmAppDev2.Controllers
 
         //GET: Trainee and Course
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create()
         {
             var traineeInDb = (from r in _context.Roles where r.Name.Contains("Trainee") select r).FirstOrDefault();
@@ -51,6 +52,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create(AssignTraineetoCourseViewModel assign)
         {
             var trainee = (from te in _context.Roles where te.Name.Contains("Trainee") select te).FirstOrDefault();
@@ -75,6 +77,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Delete(int id)
         {
             var assignInDb = _context.AssignTraineetoCourses.SingleOrDefault(a => a.ID == id);

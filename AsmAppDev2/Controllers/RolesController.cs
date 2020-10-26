@@ -21,6 +21,7 @@ namespace AsmAppDev2.Controllers
         /// Get All Roles
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var Roles = context.Roles.ToList();
@@ -31,6 +32,7 @@ namespace AsmAppDev2.Controllers
         /// Create  a New role
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var Role = new IdentityRole();
@@ -43,6 +45,7 @@ namespace AsmAppDev2.Controllers
         /// <param name="Role"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(IdentityRole Role)
         {
             context.Roles.Add(Role);

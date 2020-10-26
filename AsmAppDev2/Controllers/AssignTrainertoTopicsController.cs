@@ -36,6 +36,7 @@ namespace AsmAppDev2.Controllers
 
         //GET: Trainer and Topic
         [HttpGet]
+        [Authorize(Roles = "Staff, Trainer")]
         public ActionResult Create()
         {
             var roleInDb = (from r in _context.Roles where r.Name.Contains("Trainer") select r).FirstOrDefault();
@@ -52,6 +53,7 @@ namespace AsmAppDev2.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Staff, Trainer")]
         public ActionResult Create(AssignTrainertoTopicViewModel assign)
         {
             var trainer = (from tn in _context.Roles where tn.Name.Contains("Trainer") select tn).FirstOrDefault();
@@ -74,6 +76,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Delete(int id)
         {
             var assignInDb = _context.AssignTrainertoTopics.SingleOrDefault(a => a.ID == id);

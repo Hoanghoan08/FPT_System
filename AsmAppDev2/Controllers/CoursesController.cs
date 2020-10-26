@@ -19,6 +19,7 @@ namespace AsmAppDev2.Controllers
         }
         // GET: Courses
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Index(string searchString)
         {
             var courses = _context.Courses.Include(c => c.Category);
@@ -49,6 +50,7 @@ namespace AsmAppDev2.Controllers
 
         //GET: Create
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create()
         {
             var viewModel = new CourseCategoryViewModel
@@ -59,6 +61,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Staff")]
         public ActionResult Create(Course course)
         {
             if (!ModelState.IsValid)
@@ -103,6 +106,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpPost]
+
         public ActionResult Edit(Course course)
         {
             if (!ModelState.IsValid)
@@ -131,6 +135,7 @@ namespace AsmAppDev2.Controllers
 
         //GET: Delete
         [HttpGet]
+        [Authorize(Roles = "Staff")]
         public ActionResult Delete(int id)
         {
             var courseInDb = _context.Courses.SingleOrDefault(c => c.ID == id);

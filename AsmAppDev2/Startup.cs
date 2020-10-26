@@ -19,7 +19,7 @@ namespace AsmAppDev2
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
-            // Tạo vai trò cho database
+            // Tạo role cho database
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             // Tạo kho lưu trữ user
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));

@@ -17,6 +17,7 @@ namespace AsmAppDev2.Controllers
 		}
 		// GET: Categories
 		[HttpGet]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Index(string searchString)
 		{
 			var category = _context.Categories.ToList();
@@ -46,12 +47,14 @@ namespace AsmAppDev2.Controllers
 
 		//GET: Create 
 		[HttpGet]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Create()
 		{
 			return View();
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Create(Category category)
 		{
 			if (!ModelState.IsValid)
@@ -72,6 +75,7 @@ namespace AsmAppDev2.Controllers
 
 		//GET: Edit
 		[HttpGet]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Edit(int? id)
 		{
 			if (id == null)
@@ -111,6 +115,7 @@ namespace AsmAppDev2.Controllers
 
 		//GET: Delete
 		[HttpGet]
+		[Authorize(Roles = "Staff")]
 		public ActionResult Delete(int id)
 		{
 			var categoryInDb = _context.Categories.SingleOrDefault(c => c.ID == id);
