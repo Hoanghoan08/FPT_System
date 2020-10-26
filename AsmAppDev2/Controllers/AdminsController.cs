@@ -138,7 +138,7 @@ namespace AsmAppDev2.Controllers
                 return HttpNotFound();
             }
 
-            //Khai báo biến userId thuộc Curent.User.Identity và truy cập vào trường Id thông qua GetUserId       
+      
             var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             userId = accountInDb.Id;
             if (userId != null)
