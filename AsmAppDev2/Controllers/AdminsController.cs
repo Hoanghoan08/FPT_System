@@ -61,6 +61,7 @@ namespace AsmAppDev2.Controllers
 
         //Edit admin role
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             // Find and assign the Id value in the Users table to userInDb
@@ -74,6 +75,7 @@ namespace AsmAppDev2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(ApplicationUser user)
         {
             // Check the value of Id
