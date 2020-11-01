@@ -137,6 +137,7 @@ namespace AsmAppDev2.Controllers
 
         //
         // GET: /Account/Register
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Register()
         {
             // Admin can create Role of Trainer and Training Staff
@@ -159,7 +160,7 @@ namespace AsmAppDev2.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [Authorize (Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

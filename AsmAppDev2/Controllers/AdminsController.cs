@@ -141,7 +141,7 @@ namespace AsmAppDev2.Controllers
             }
 
       
-            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             userId = accountInDb.Id;
             if (userId != null)
             {
